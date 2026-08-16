@@ -1,43 +1,23 @@
-# Astro Starter Kit: Minimal
+# Anthony Christiana — personal site
+
+A graphite, editorial personal website built with Astro and edited through Pages CMS.
+
+## Local preview
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Content editing
 
-## 🚀 Project Structure
+- `src/data/site.json` controls the homepage introduction and contact details.
+- `src/content/writing` contains essays and notes.
+- `src/content/creative` contains creative projects.
+- `src/content/research` contains research areas, papers, talks, and projects.
+- `src/content/teaching` contains courses and teaching materials.
+- `.pages.yml` exposes all of these through Pages CMS.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Deployment
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The GitHub Actions workflow builds the site for GitHub Pages whenever `main` changes. The temporary deployment uses `/antchristiana-site` as its base path. When `antchristiana.com` is connected, change `astro.config.mjs` to use `site: 'https://antchristiana.com'` and remove the `base` line.

@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { mediaPath, sitePath } from '../../utils/paths';
+
+const works = (await getCollection('creative', ({ data }) => !data.draft))
+	.sort((a, b) => b.data.year - a.data.year);
+---
+
+<BaseLayout title="Creative work" description="Creative projects and experiments by Anthony Christiana.">
+	<header class="page-intro page-intro--short">
+		<p class="eyebrow">Creative work</p>
+		<h1>Projects made to be looked at, read, played, or handled.</h1>
+		<p>This space is intentionally broad: finished pieces, experiments, visual studies, games, and projects that do not need a more respectable category.</p>
+	</header>
+	<section class="creative-grid">
+		{works.map((work, index) => (
+			<a href={sitePath(`creative/${work.id}/`)} class="creative-card">
+				<div class:list={['creative-image', !work.data.image && 'creative-image--empty']} style={work.data.image ? `background-image:url('${mediaPath(work.data.image)}')` : undefined}>
+					{!work.data.image && <span>{String(index + 1).padStart(2, '0')}</span>}
+				</div>
+				<p class="entry-meta">{work.data.medium} · {work.data.year}</p>
+				<h2>{work.data.title}</h2>
+				<p>{work.data.description}</p>
+			</a>
+		))}
+	</section>
+</BaseLayout>

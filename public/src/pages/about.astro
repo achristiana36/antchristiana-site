@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import site from '../data/site.json';
+import { sitePath } from '../utils/paths';
+---
+
+<BaseLayout title="About" description={`About ${site.name}.`}>
+	<header class="page-intro about-intro">
+		<p class="eyebrow">About</p>
+		<h1>Mathematician, teacher, writer, and maker of things.</h1>
+	</header>
+	<section class="about-grid">
+		<div class="about-aside"><span>AC</span><p>{site.location}</p></div>
+		<div class="prose prose--large">
+			<p>{site.introduction}</p>
+			<p>{site.about}</p>
+			<h2>Elsewhere</h2>
+			<p>
+				{site.email && <><a href={`mailto:${site.email}`}>Email</a><br /></>}
+				{site.github && <><a href={site.github}>GitHub ↗</a><br /></>}
+				{site.cv && <a href={sitePath(site.cv)}>Curriculum vitae</a>}
+			</p>
+		</div>
+	</section>
+</BaseLayout>

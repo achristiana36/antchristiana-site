@@ -1,0 +1,103 @@
+media:
+  input: public/images
+  output: /images
+  rename: safe
+  categories: [image]
+
+content:
+  - name: site
+    label: Site settings
+    type: file
+    path: src/data/site.json
+    format: json
+    fields:
+      - { name: name, label: Name, type: string, required: true }
+      - { name: eyebrow, label: Small homepage line, type: string, required: true }
+      - { name: headline, label: Homepage headline, type: text, required: true }
+      - { name: introduction, label: Short introduction, type: text, required: true }
+      - { name: about, label: About summary, type: text, required: true }
+      - { name: location, label: Location, type: string }
+      - { name: email, label: Public email, type: string }
+      - { name: github, label: GitHub URL, type: string }
+      - { name: cv, label: CV path or URL, type: string }
+
+  - name: writing
+    label: Writing
+    type: collection
+    path: src/content/writing
+    format: yaml-frontmatter
+    view: { primary: title, sort: date, order: desc }
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: description, label: Short description, type: text, required: true }
+      - { name: date, label: Publication date, type: date, required: true }
+      - { name: featured, label: Feature on homepage, type: boolean }
+      - { name: draft, label: Hide as draft, type: boolean }
+      - { name: image, label: Cover image, type: image }
+      - name: body
+        label: Article
+        type: rich-text
+        options: { media: true, path: public/images/writing }
+
+  - name: creative
+    label: Creative work
+    type: collection
+    path: src/content/creative
+    format: yaml-frontmatter
+    view: { primary: title, sort: year, order: desc }
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: description, label: Short description, type: text, required: true }
+      - { name: year, label: Year, type: number, required: true }
+      - { name: medium, label: Medium or form, type: string, required: true }
+      - { name: featured, label: Feature on homepage, type: boolean }
+      - { name: draft, label: Hide as draft, type: boolean }
+      - { name: image, label: Cover image, type: image }
+      - { name: externalUrl, label: External project URL, type: string }
+      - name: body
+        label: Project description
+        type: rich-text
+        options: { media: true, path: public/images/creative }
+
+  - name: research
+    label: Research
+    type: collection
+    path: src/content/research
+    format: yaml-frontmatter
+    view: { primary: title, sort: year, order: desc }
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: description, label: Short description, type: text, required: true }
+      - { name: year, label: Year, type: number, required: true }
+      - name: kind
+        label: Type
+        type: string
+        description: Research area, Paper, Preprint, Talk, or Project
+        required: true
+      - { name: venue, label: Journal or venue, type: string }
+      - { name: url, label: Paper or project URL, type: string }
+      - { name: featured, label: Feature on homepage, type: boolean }
+      - { name: body, label: Longer description, type: rich-text }
+
+  - name: teaching
+    label: Teaching
+    type: collection
+    path: src/content/teaching
+    format: yaml-frontmatter
+    view: { primary: title, sort: term, order: desc }
+    fields:
+      - { name: title, label: Course or project title, type: string, required: true }
+      - { name: description, label: Short description, type: text, required: true }
+      - { name: term, label: Term, type: string, required: true }
+      - { name: institution, label: Institution, type: string }
+      - { name: url, label: Course or resource URL, type: string }
+      - { name: featured, label: Featured, type: boolean }
+      - { name: body, label: Longer description, type: rich-text }
+
+settings:
+  commit:
+    templates:
+      create: "content: add {filename}"
+      update: "content: update {filename}"
+      delete: "content: remove {filename}"
+      rename: "content: rename {oldFilename} to {filename}"
