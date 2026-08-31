@@ -1,0 +1,79 @@
+---
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { sitePath } from '../utils/paths';
+
+// Export YOUR Illustrator drawings as transparent SVGs and put them in
+// public/images/site/. Nothing appears until the corresponding file exists.
+// Positions are relative to the browser window. Keep artwork at the margins.
+const knots = [
+  {
+    file: 'images/site/knot-1.svg',
+    left: '-10vw',
+    right: 'auto',
+    top: '16vh',
+    width: 'min(38vw, 560px)',
+    opacity: 0.075,
+    rotation: '-12deg',
+  },
+  {
+    file: 'images/site/knot-2.svg',
+    left: 'auto',
+    right: '-10vw',
+    top: '62vh',
+    width: 'min(32vw, 460px)',
+    opacity: 0.055,
+    rotation: '12deg',
+  },
+];
+const available = knots.filter((knot) => existsSync(resolve('public', knot.file)));
+---
+{available.length > 0 && (
+  <div class="personal-knot-background" aria-hidden="true">
+    {available.map((knot) => (
+      <img
+        src={sitePath(knot.file)}
+        alt=""
+        class="personal-knot-background__image"
+        draggable="false"
+        style={{
+          '--knot-left': knot.left,
+          '--knot-right': knot.right,
+          '--knot-top': knot.top,
+          '--knot-width': knot.width,
+          '--knot-opacity': knot.opacity,
+          '--knot-rotation': knot.rotation,
+        }}
+      />
+    ))}
+  </div>
+)}
+<style>
+  /* BaseLayout's .page-shell supplies the stacking context. This layer
+     sits behind its content, above the body background, and cannot take clicks. */
+  .personal-knot-background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    user-select: none;
+    overflow: hidden;
+  }
+  .personal-knot-background__image {
+    position: absolute;
+    left: var(--knot-left);
+    right: var(--knot-right);
+    top: var(--knot-top);
+    width: var(--knot-width);
+    max-width: none;
+    height: auto;
+    max-height: 65vh;
+    object-fit: contain;
+    opacity: var(--knot-opacity);
+    transform: rotate(var(--knot-rotation));
+  }
+  /* No decorative background on phones; keep the content easy to read. */
+  @media (max-width: 760px) {
+    .personal-knot-background { display: none; }
+  }
+</style>

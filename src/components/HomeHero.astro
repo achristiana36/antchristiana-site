@@ -1,0 +1,92 @@
+---
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import site from '../data/site.json';
+import { sitePath } from '../utils/paths';
+import KnotBackground from './KnotBackground.astro';
+
+interface Props {
+  heading?: string;
+  eyebrow?: string;
+  role?: string;
+  institution?: string;
+  photoPosition?: string;
+}
+const {
+  heading = site.name,
+  eyebrow = 'Mathematician · Educator · Writer',
+  role = 'PhD candidate in mathematics',
+  institution = 'George Washington University',
+  photoPosition = '50% 35%',
+} = Astro.props;
+// A real photo is optional while you preview. No broken image or stock face.
+// Use exactly one of these filenames in public/images/site/.
+const photoFile = ['headshot.jpg', 'headshot.jpeg', 'headshot.png', 'headshot.webp']
+  .find((file) => existsSync(resolve('public', 'images', 'site', file)));
+---
+<KnotBackground />
+<section class="home-portrait-hero" aria-labelledby="home-name">
+  <div class="home-portrait-hero__copy">
+    <p class="home-portrait-hero__eyebrow">{eyebrow}</p>
+    <h1 id="home-name">{heading}</h1>
+    <p class="home-portrait-hero__role">{role}<br /><span>{institution}</span></p>
+    <p class="home-portrait-hero__introduction">{site.introduction}</p>
+    <div class="home-portrait-hero__actions">
+      <a class="home-portrait-hero__primary" href={sitePath('research/')}>Explore my research <span aria-hidden="true">↗</span></a>
+      {site.cv && <a class="home-portrait-hero__secondary" href={sitePath(site.cv)}>Curriculum vitae</a>}
+      {!site.cv && <a class="home-portrait-hero__secondary" href={sitePath('about/')}>More about me</a>}
+    </div>
+  </div>
+  <figure class="home-portrait-hero__figure">
+    <div class="home-portrait-hero__photo">
+      {photoFile ? (
+        <img src={sitePath(`images/site/${photoFile}`)} alt={`Portrait of ${site.name}`} width="4000" height="6000" loading="eager" fetchpriority="high" style={{ objectPosition: photoPosition }} />
+      ) : (
+        <div class="home-portrait-hero__placeholder" role="img" aria-label="Headshot placeholder; no photograph has been added yet">
+          <span class="home-portrait-hero__initials" aria-hidden="true">AC</span>
+          <span>Your headshot here</span>
+        </div>
+      )}
+    </div>
+    {site.location && <figcaption>{site.location}</figcaption>}
+  </figure>
+</section>
+
+<style>
+  /* Suppress the old fixed diagrams on this page only. Other pages keep
+     their existing TopologyField; the old component need not be replaced. */
+  :global(body:has(.home-portrait-hero) .topology-field) { display: none; }
+  .home-portrait-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: center;
+    padding: clamp(3.5rem, 7vw, 6.5rem) 0 clamp(3rem, 6vw, 5rem);
+    border-bottom: 1px solid var(--line, rgba(238,234,224,.14));
+  }
+  .home-portrait-hero__copy { min-width: 0; }
+  .home-portrait-hero__eyebrow { margin: 0 0 1.6rem; color: var(--green-bright, #91a88f); font: 500 .7rem/1.7 var(--sans); letter-spacing: .15em; text-transform: uppercase; }
+  .home-portrait-hero h1 { max-width: 10ch; margin: 0 0 1.65rem; color: var(--paper, #eeeae0); font: 400 clamp(3.5rem, 6.5vw, 6.1rem)/1.02 var(--serif); letter-spacing: -.045em; overflow-wrap: normal; }
+  .home-portrait-hero__role { margin: 0 0 1.5rem; font: 400 1.05rem/1.7 var(--sans); color: var(--paper, #eeeae0); }
+  .home-portrait-hero__role span { color: var(--paper-soft, #d5d1c7); }
+  .home-portrait-hero__introduction { max-width: 49ch; margin: 0 0 2rem; color: var(--paper-soft, #d5d1c7); font: 400 1rem/1.8 var(--sans); }
+  .home-portrait-hero__actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1.25rem 1.7rem; }
+  .home-portrait-hero__primary, .home-portrait-hero__secondary { display: inline-flex; gap: .9rem; align-items: center; font: 500 .8rem/1.5 var(--sans); }
+  .home-portrait-hero__primary { border: 1px solid var(--green, #69816c); padding: .8rem 1rem; color: var(--paper, #eeeae0); }
+  .home-portrait-hero__primary:hover { background: var(--graphite-raised, #292e2a); }
+  .home-portrait-hero__secondary { color: var(--paper-soft, #d5d1c7); text-decoration: underline; text-decoration-color: var(--green, #69816c); text-underline-offset: .35em; }
+  .home-portrait-hero__figure { margin: 0; width: 100%; max-width: 390px; justify-self: end; }
+  .home-portrait-hero__photo { aspect-ratio: 4 / 5; background: var(--graphite-soft, #202421); border: 1px solid var(--line, rgba(238,234,224,.14)); overflow: hidden; }
+  .home-portrait-hero__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .home-portrait-hero__placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; color: var(--muted, #9c9f98); font: 400 .75rem/1.5 var(--sans); }
+  .home-portrait-hero__initials { color: var(--green-bright, #91a88f); font: 400 4rem/1 var(--serif); }
+  .home-portrait-hero figcaption { padding-top: .85rem; color: var(--muted, #9c9f98); font: 400 .67rem/1.5 var(--sans); letter-spacing: .12em; text-transform: uppercase; }
+  @media (max-width: 760px) {
+    .home-portrait-hero { grid-template-columns: minmax(0, 1fr); gap: 2.75rem; padding-top: 3rem; }
+    .home-portrait-hero h1 { font-size: clamp(3.25rem, 10vw, 5rem); }
+    .home-portrait-hero__figure { justify-self: start; max-width: 360px; }
+  }
+  @media (max-width: 380px) {
+    .home-portrait-hero h1 { font-size: 2.9rem; }
+  }
+</style>
