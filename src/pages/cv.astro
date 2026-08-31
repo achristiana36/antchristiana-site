@@ -1,0 +1,97 @@
+---
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import site from '../data/site.json';
+import { sitePath } from '../utils/paths';
+
+interface Profile { label: string; url: string; }
+const publicSite = site as typeof site & { cv?: string; linkedin?: string; socials?: Profile[] };
+const webUrl = (value?: string) => {
+  if (!value) return '';
+  try {
+    const url = new URL(value.trim());
+    return ['http:', 'https:'].includes(url.protocol) ? url.href : '';
+  } catch { return ''; }
+};
+const requestedCv = publicSite.cv?.trim() || 'files/Anthony-Christiana-CV.pdf';
+const externalCv = webUrl(requestedCv);
+const localCv = requestedCv.replace(/^\/+/, '');
+const cvHref = externalCv || (existsSync(resolve('public', localCv)) ? sitePath(localCv) : '');
+const profiles = [
+  { label: 'LinkedIn', url: publicSite.linkedin || '' },
+  { label: 'GitHub', url: site.github || '' },
+  ...(publicSite.socials || []),
+].map((profile) => ({ label: profile.label.trim(), url: webUrl(profile.url) }))
+ .filter((profile) => profile.label && profile.url);
+const email = site.email?.trim();
+---
+<BaseLayout title="CV & Contact" description={`Curriculum vitae and contact information for ${site.name}.`}>
+  <header class="cv-intro">
+    <p class="eyebrow">{site.name}</p>
+    <h1>CV &amp; Contact</h1>
+    <p>Academic experience, contact information, and profiles elsewhere.</p>
+  </header>
+
+  <div class="cv-contact-grid">
+    <section class="cv-panel" aria-labelledby="cv-heading">
+      <p class="kicker">Experience</p>
+      <h2 id="cv-heading">Curriculum vitae</h2>
+      {cvHref ? (
+        <>
+          <p>My research, teaching, publications, and professional experience.</p>
+          <a class="cv-download" href={cvHref} download={externalCv ? undefined : 'Anthony-Christiana-CV.pdf'}>Download CV (PDF) <span aria-hidden="true">↓</span></a>
+          <a class="cv-open" href={cvHref} target="_blank" rel="noopener noreferrer">Open PDF in a new tab <span aria-hidden="true">↗</span></a>
+        </>
+      ) : (
+        <>
+          <p>For a current copy of my CV, please get in touch.</p>
+          {email && <a class="cv-download" href={`mailto:${email}?subject=CV%20request`}>Request my CV <span aria-hidden="true">↗</span></a>}
+        </>
+      )}
+    </section>
+
+    <section class="cv-panel cv-panel--contact" aria-labelledby="contact-heading">
+      <p class="kicker">Contact</p>
+      <h2 id="contact-heading">Get in touch</h2>
+      <ul class="contact-profiles">
+        {email && <li><a href={`mailto:${email}`}><span class="contact-label">Email</span><span class="contact-value">{email}</span><span aria-hidden="true">↗</span></a></li>}
+        {profiles.map((profile) => <li><a href={profile.url} target="_blank" rel="me noopener noreferrer"><span class="contact-label">{profile.label}</span><span class="contact-value">View profile</span><span aria-hidden="true">↗</span></a></li>)}
+      </ul>
+    </section>
+  </div>
+
+  {cvHref && (
+    <section class="cv-document" aria-label="CV PDF preview">
+      <object data={cvHref} type="application/pdf" aria-label={`Curriculum vitae of ${site.name}`}>
+        <p>Your browser cannot display the PDF here. <a href={cvHref}>Open the CV PDF.</a></p>
+      </object>
+    </section>
+  )}
+</BaseLayout>
+<style>
+  .cv-intro { padding: clamp(3.5rem, 7vw, 6rem) 0 3.5rem; max-width: 850px; }
+  .cv-intro h1 { margin: 1.1rem 0 1.5rem; font: 400 clamp(3rem, 6vw, 5.5rem)/1.05 var(--serif); letter-spacing: -.045em; }
+  .cv-intro > p:last-child { max-width: 55ch; color: var(--paper-soft); }
+  .cv-contact-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: clamp(2rem,6vw,6rem); padding: 0 0 6rem; }
+  .cv-panel { border-top: 1px solid var(--line); padding-top: 2rem; min-width: 0; }
+  .cv-panel h2 { margin: .75rem 0 1.25rem; font: 400 2.15rem/1.15 var(--serif); letter-spacing: -.02em; }
+  .cv-panel > p:not(.kicker) { color: var(--paper-soft); max-width: 40ch; }
+  .cv-download { display: inline-flex; gap: 1.3rem; align-items: center; margin-top: 1rem; padding: .85rem 1.1rem; border: 1px solid var(--green); font-size: .85rem; }
+  .cv-download:hover { background: var(--graphite-raised); }
+  .cv-open { display: block; width: fit-content; margin-top: 1.25rem; color: var(--paper-soft); font-size: .8rem; text-decoration: underline; text-underline-offset: .3em; }
+  .contact-profiles { list-style: none; margin: 0; padding: 0; }
+  .contact-profiles li { border-bottom: 1px solid var(--line); }
+  .contact-profiles a { display: grid; grid-template-columns: 85px minmax(0,1fr) 16px; gap: 1rem; padding: 1rem 0; align-items: baseline; }
+  .contact-profiles a:hover { color: var(--green-bright); }
+  .contact-label { font-size: .85rem; }
+  .contact-value { color: var(--muted); font-size: .8rem; overflow-wrap: anywhere; }
+  .cv-document { margin-bottom: 5rem; border: 1px solid var(--line); background: var(--graphite-soft); }
+  .cv-document object { display: block; width: 100%; height: 850px; }
+  .cv-document p { padding: 1.5rem; }
+  @media (max-width: 760px) {
+    .cv-contact-grid { grid-template-columns: minmax(0,1fr); gap: 2.5rem; padding-bottom: 4rem; }
+    .contact-profiles a { grid-template-columns: 70px minmax(0,1fr) 16px; gap: .6rem; }
+    .cv-document { display: none; }
+  }
+</style>

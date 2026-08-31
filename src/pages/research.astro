@@ -8,8 +8,8 @@ const items = (await getCollection('research')).sort((a, b) => b.data.year - a.d
 <BaseLayout title="Research" description="Research in knot theory, diagram algebras, and low-dimensional topology.">
 	<header class="page-intro">
 		<p class="eyebrow">Research</p>
-		<h1>Topology, algebra, and the diagrams between them.</h1>
-		<p>My work studies how topological information is encoded by diagram algebras, Gram forms, and combinatorial structures, with particular interest in Temperley–Lieb theory and skein modules.</p>
+		<h1>Knot Theory</h1>
+		<p>Knot theory is the study of embeddings of circles in three-space. My work studies how topological information is encoded by diagram algebras, Gram forms, and combinatorial structures.</p>
 	</header>
 	<section class="entry-list" aria-label="Research projects and publications">
 		{items.map((item, index) => (

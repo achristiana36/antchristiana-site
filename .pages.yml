@@ -19,7 +19,15 @@ content:
       - { name: location, label: Location, type: string }
       - { name: email, label: Public email, type: string }
       - { name: github, label: GitHub URL, type: string }
-      - { name: cv, label: CV path or URL, type: string }
+      - { name: cv, label: CV PDF path or URL, type: string, description: "Use files/Anthony-Christiana-CV.pdf or a full https URL." }
+      - { name: linkedin, label: LinkedIn URL, type: string }
+      - name: socials
+        label: Other social profiles
+        type: object
+        list: true
+        fields:
+          - { name: label, label: Platform name, type: string, required: true }
+          - { name: url, label: Profile URL, type: string, required: true }
 
   - name: writing
     label: Writing

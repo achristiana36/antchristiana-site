@@ -3,7 +3,6 @@ import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import site from '../data/site.json';
 import { sitePath } from '../utils/paths';
-import KnotBackground from './KnotBackground.astro';
 
 interface Props {
   heading?: string;
@@ -24,7 +23,6 @@ const {
 const photoFile = ['headshot.jpg', 'headshot.jpeg', 'headshot.png', 'headshot.webp']
   .find((file) => existsSync(resolve('public', 'images', 'site', file)));
 ---
-<KnotBackground />
 <section class="home-portrait-hero" aria-labelledby="home-name">
   <div class="home-portrait-hero__copy">
     <p class="home-portrait-hero__eyebrow">{eyebrow}</p>
@@ -32,9 +30,7 @@ const photoFile = ['headshot.jpg', 'headshot.jpeg', 'headshot.png', 'headshot.we
     <p class="home-portrait-hero__role">{role}<br /><span>{institution}</span></p>
     <p class="home-portrait-hero__introduction">{site.introduction}</p>
     <div class="home-portrait-hero__actions">
-      <a class="home-portrait-hero__primary" href={sitePath('research/')}>Explore my research <span aria-hidden="true">↗</span></a>
-      {site.cv && <a class="home-portrait-hero__secondary" href={sitePath(site.cv)}>Curriculum vitae</a>}
-      {!site.cv && <a class="home-portrait-hero__secondary" href={sitePath('about/')}>More about me</a>}
+      <a class="home-portrait-hero__primary" href={sitePath('cv/')}>CV &amp; Contact <span aria-hidden="true">↗</span></a>
     </div>
   </div>
   <figure class="home-portrait-hero__figure">
@@ -53,9 +49,6 @@ const photoFile = ['headshot.jpg', 'headshot.jpeg', 'headshot.png', 'headshot.we
 </section>
 
 <style>
-  /* Suppress the old fixed diagrams on this page only. Other pages keep
-     their existing TopologyField; the old component need not be replaced. */
-  :global(body:has(.home-portrait-hero) .topology-field) { display: none; }
   .home-portrait-hero {
     display: grid;
     grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
@@ -71,10 +64,9 @@ const photoFile = ['headshot.jpg', 'headshot.jpeg', 'headshot.png', 'headshot.we
   .home-portrait-hero__role span { color: var(--paper-soft, #d5d1c7); }
   .home-portrait-hero__introduction { max-width: 49ch; margin: 0 0 2rem; color: var(--paper-soft, #d5d1c7); font: 400 1rem/1.8 var(--sans); }
   .home-portrait-hero__actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1.25rem 1.7rem; }
-  .home-portrait-hero__primary, .home-portrait-hero__secondary { display: inline-flex; gap: .9rem; align-items: center; font: 500 .8rem/1.5 var(--sans); }
+  .home-portrait-hero__primary { display: inline-flex; gap: .9rem; align-items: center; font: 500 .8rem/1.5 var(--sans); }
   .home-portrait-hero__primary { border: 1px solid var(--green, #69816c); padding: .8rem 1rem; color: var(--paper, #eeeae0); }
   .home-portrait-hero__primary:hover { background: var(--graphite-raised, #292e2a); }
-  .home-portrait-hero__secondary { color: var(--paper-soft, #d5d1c7); text-decoration: underline; text-decoration-color: var(--green, #69816c); text-underline-offset: .35em; }
   .home-portrait-hero__figure { margin: 0; width: 100%; max-width: 390px; justify-self: end; }
   .home-portrait-hero__photo { aspect-ratio: 4 / 5; background: var(--graphite-soft, #202421); border: 1px solid var(--line, rgba(238,234,224,.14)); overflow: hidden; }
   .home-portrait-hero__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }

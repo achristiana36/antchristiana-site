@@ -11,7 +11,7 @@ import { sitePath } from '../utils/paths';
 	<div class="footer-links">
 		{site.email && <a href={`mailto:${site.email}`}>Email</a>}
 		{site.github && <a href={site.github} rel="me">GitHub</a>}
-		{site.cv && <a href={sitePath(site.cv)}>CV</a>}
+		<a href={sitePath('cv/')}>CV &amp; Contact</a>
 		<a href={sitePath('writing/')}>Writing</a>
 	</div>
 	<p class="footer-mark">Built as a quiet place for ongoing work. © {new Date().getFullYear()}</p>
