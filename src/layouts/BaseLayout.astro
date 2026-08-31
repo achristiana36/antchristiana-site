@@ -1,7 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import TopologyField from '../components/TopologyField.astro';
+import KnotBackground from '../components/KnotBackground.astro';
 import '../styles/global.css';
 import site from '../data/site.json';
 
@@ -27,11 +27,19 @@ const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — Mathem
 	</head>
 	<body>
 		<a class="skip-link" href="#content">Skip to content</a>
-		<TopologyField />
 		<div class="page-shell">
+			<KnotBackground />
 			<Header />
 			<main id="content"><slot /></main>
 			<Footer />
 		</div>
 	</body>
 </html>
+
+<style>
+  /* An older HomeHero may still include its own background. Only show
+     the shared instance above; leave its existing design settings alone. */
+  :global(.page-shell > main .personal-knot-background) {
+    display: none;
+  }
+</style>
