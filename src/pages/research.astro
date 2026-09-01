@@ -4,22 +4,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { sitePath } from '../utils/paths';
 
 
-const items = (await getCollection('research')).sort((a, b) => b.data.year - a.data.year);
+const items = (
+	await getCollection('research', ({ data }) => data.section !== 'teaching')
+).sort((a, b) => b.data.year - a.data.year);
 ---
 
-<BaseLayout title="Research" description="Research in knot theory, diagram algebras, and low-dimensional topology.">
+<BaseLayout title="Research" description="Publications, talks, mathematical music, and projects by Anthony Christiana.">
 	<header class="page-intro">
 		<p class="eyebrow">Research</p>
-		<h1>Knot Theory</h1>
-		<p>Knots are circles embedded in space. My work studies how topological information is encoded by diagram algebras, Gram forms, and combinatorial structures.</p>
+		<h1>Papers, talks & projects</h1>
+		<p>My work moves through knot theory, diagram algebras, graph theory, and mathematical music. Each entry gathers the paper, slides, video, code, or presentation materials in one place.</p>
 	</header>
 	<section class="entry-list" aria-label="Research projects and publications">
 		{items.map((item, index) => (
 			<article class="entry-row">
 				<div class="entry-index">{String(index + 1).padStart(2, '0')}</div>
 				<div>
-					<p class="entry-meta">{item.data.kind} · {item.data.year}{item.data.venue ? ` · ${item.data.venue}` : ''}</p>
-					<h2>{item.data.url ? <a href={item.data.url}>{item.data.title}</a> : item.data.title}</h2>
+					<p class="entry-meta">{item.data.kind} · {item.data.date ?? item.data.year}{item.data.venue ? ` · ${item.data.venue}` : ''}</p>
+					<h2><a href={sitePath(`research/${item.id}/`)}>{item.data.title}</a></h2>
 					<p>{item.data.description}</p>
 					<a class="button-link" href={sitePath(`research/${item.id}/`)}>Read more</a>
 				</div>

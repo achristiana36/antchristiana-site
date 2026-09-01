@@ -11,17 +11,86 @@ export async function getStaticPaths() {
 interface Props { post: CollectionEntry<'research'>; }
 const { post } = Astro.props;
 const { Content } = await render(post);
+const pdfSrc = post.data.pdf ? sitePath(post.data.pdf) : undefined;
+const videos = post.data.youtubeIds ?? [];
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description}>
-  <article class="article">
+<BaseLayout title={post.data.title} description={post.data.description} socialImage={false}>
+  <article class="article article--resource">
     <a class="back-link" href={sitePath('research/')}>← All research</a>
     <header>
-      <p class="eyebrow">{post.data.kind} · {post.data.year}{post.data.venue ? ` · ${post.data.venue}` : ''}</p>
+      <p class="eyebrow">{post.data.kind} · {post.data.date ?? post.data.year}{post.data.venue ? ` · ${post.data.venue}` : ''}</p>
       <h1>{post.data.title}</h1>
+      {post.data.authors && <p class="article-authors">{post.data.authors}</p>}
       <p class="article-deck">{post.data.description}</p>
-      {post.data.url && <a class="button-link" href={post.data.url}>Paper or project link ↗</a>}
     </header>
+
+    {post.data.status && (
+      <section class="status-note" aria-labelledby="status-heading">
+        <p class="kicker" id="status-heading">Publication status</p>
+        <p>{post.data.status}</p>
+      </section>
+    )}
+
+    {(post.data.arxiv || post.data.doi || post.data.url || post.data.github || post.data.showGithubPlaceholder) && (
+      <nav class="resource-links" aria-label="Links for this work">
+        {post.data.arxiv && <a href={post.data.arxiv}>arXiv <span aria-hidden="true">↗</span></a>}
+        {post.data.doi && <a href={post.data.doi}>Publisher / DOI <span aria-hidden="true">↗</span></a>}
+        {post.data.url && <a href={post.data.url}>Project link <span aria-hidden="true">↗</span></a>}
+        {post.data.github && <a href={post.data.github}>Max/MSP patch on GitHub <span aria-hidden="true">↗</span></a>}
+        {post.data.showGithubPlaceholder && !post.data.github && <span class="resource-link-placeholder">Max/MSP patch on GitHub · URL to add</span>}
+      </nav>
+    )}
+
     <div class="prose"><Content /></div>
+
+    {post.data.pdf && (
+      <section class="embedded-resource" aria-labelledby="pdf-heading">
+        <div class="resource-heading">
+          <p class="kicker">{post.data.kind === 'Poster' ? 'Poster' : post.data.kind === 'Paper' || post.data.kind === 'Preprint' ? 'Read the paper' : 'Presentation materials'}</p>
+          <h2 id="pdf-heading">Embedded PDF</h2>
+        </div>
+        {post.data.pdfReady ? (
+          <div class="pdf-shell">
+            <iframe src={pdfSrc} title={`PDF: ${post.data.title}`}></iframe>
+            <a href={pdfSrc}>Open PDF in a new tab <span aria-hidden="true">↗</span></a>
+          </div>
+        ) : (
+          <div class="fill-placeholder">
+            <p class="fill-placeholder__title">PDF ready to add</p>
+            <p>Place the finished file at <code>public/{post.data.pdf}</code>, then set <code>pdfReady: true</code> in this post. The embedded viewer will replace this panel.</p>
+          </div>
+        )}
+      </section>
+    )}
+
+    {videos.length > 0 && (
+      <section class="embedded-resource" aria-labelledby="video-heading">
+        <div class="resource-heading">
+          <p class="kicker">Watch & listen</p>
+          <h2 id="video-heading">{videos.length > 1 ? 'Video archive' : 'Project video'}</h2>
+        </div>
+        <div class:list={['video-grid', videos.length === 1 && 'video-grid--single']}>
+          {videos.map((videoId, index) => videoId !== 'TODO' ? (
+            <div class="video-item">
+              <div class="video-frame">
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${videoId}`}
+                  title={post.data.videoTitles?.[index] ?? `${post.data.title} video ${index + 1}`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              {post.data.videoTitles?.[index] && <p>{post.data.videoTitles[index]}</p>}
+            </div>
+          ) : (
+            <div class="fill-placeholder fill-placeholder--video">
+              <p class="fill-placeholder__title">YouTube video {videos.length > 1 ? index + 1 : ''} ready to add</p>
+              <p>Replace this <code>TODO</code> in <code>youtubeIds</code> with the characters after <code>youtu.be/</code> or <code>?v=</code>.</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
   </article>
 </BaseLayout>

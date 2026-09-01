@@ -80,10 +80,22 @@ content:
       - name: kind
         label: Type
         type: string
-        description: Research area, Paper, Preprint, Talk, or Project
+        description: Research area, Paper, Preprint, Talk, Project, Thesis, or Poster
         required: true
+      - { name: section, label: Site section, type: string, description: "Use research or teaching." }
+      - { name: date, label: Display date, type: string, description: "For example: April 24, 2026. If blank, the year is shown." }
       - { name: venue, label: Journal or venue, type: string }
+      - { name: authors, label: Authors, type: text }
+      - { name: status, label: Publication status, type: text }
+      - { name: arxiv, label: arXiv URL, type: string }
+      - { name: doi, label: DOI or publisher URL, type: string }
       - { name: url, label: Paper or project URL, type: string }
+      - { name: pdf, label: Embedded PDF path or URL, type: string, description: "Use a path such as files/talks/slides.pdf or a full https URL." }
+      - { name: pdfReady, label: Show embedded PDF, type: boolean }
+      - { name: youtubeIds, label: YouTube video IDs, type: string, list: true, description: "Use only the ID after youtu.be/ or ?v=. Use TODO as a placeholder." }
+      - { name: videoTitles, label: Video titles, type: string, list: true }
+      - { name: github, label: GitHub project URL, type: string }
+      - { name: showGithubPlaceholder, label: Show GitHub placeholder, type: boolean }
       - { name: featured, label: Feature on homepage, type: boolean }
       - { name: body, label: Longer description, type: rich-text }
 

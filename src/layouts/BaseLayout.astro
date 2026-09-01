@@ -4,14 +4,20 @@ import Footer from '../components/Footer.astro';
 import KnotBackground from '../components/KnotBackground.astro';
 import '../styles/global.css';
 import site from '../data/site.json';
+import { sitePath } from '../utils/paths';
 
 interface Props {
 	title?: string;
 	description?: string;
+	socialImage?: string | false;
 }
 
-const { title, description = site.introduction } = Astro.props;
+const { title, description = site.introduction, socialImage } = Astro.props;
 const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — Mathematician, educator, and writer`;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+const socialImageUrl = socialImage === false
+	? undefined
+	: new URL(sitePath(socialImage ?? 'images/site/og.png'), Astro.site ?? Astro.url);
 ---
 
 <!doctype html>
@@ -22,6 +28,16 @@ const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — Mathem
 		<meta name="generator" content={Astro.generator} />
 		<meta name="theme-color" content="#191c1a" />
 		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		{socialImageUrl && <meta property="og:image" content={socialImageUrl} />}
+		<meta name="twitter:card" content={socialImageUrl ? 'summary_large_image' : 'summary'} />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={description} />
+		{socialImageUrl && <meta name="twitter:image" content={socialImageUrl} />}
 		<link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
 		<title>{pageTitle}</title>
 	</head>
@@ -35,4 +51,3 @@ const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — Mathem
 		</div>
 	</body>
 </html>
-

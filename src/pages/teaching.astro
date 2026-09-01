@@ -1,8 +1,16 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { sitePath } from '../utils/paths';
 
 const courses = await getCollection('teaching');
+
+const talks = (
+  await getCollection(
+    'research',
+    ({ data }) => data.section === 'teaching'
+  )
+).sort((a, b) => b.data.year - a.data.year);
 ---
 
 <BaseLayout title="Teaching" description="Teaching, course materials, and an approach to mathematical explanation.">
@@ -27,4 +35,35 @@ const courses = await getCollection('teaching');
 			</article>
 		))}
 	</section>
+	<section class="section-block" aria-labelledby="talks-heading">
+  <div class="section-heading">
+    <p class="kicker">Talks & outreach</p>
+    <h2 id="talks-heading">Mathematics for broader audiences</h2>
+  </div>
+
+  <div class="entry-list">
+    {talks.map((talk, index) => (
+      <article class="entry-row">
+        <div class="entry-index">
+          {String(index + 1).padStart(2, '0')}
+        </div>
+
+        <div>
+          <p class="entry-meta">
+            {talk.data.kind} · {talk.data.date ?? talk.data.year}
+            {talk.data.venue ? ` · ${talk.data.venue}` : ''}
+          </p>
+
+          <h2>
+            <a href={sitePath(`research/${talk.id}/`)}>
+              {talk.data.title}
+            </a>
+          </h2>
+
+          <p>{talk.data.description}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
 </BaseLayout>
