@@ -13,6 +13,8 @@
 	--max: 1240px;
 }
 
+
+
 * { box-sizing: border-box; }
 html { background: var(--graphite); color: var(--paper); scroll-behavior: smooth; }
 body { position: relative; isolation: isolate; margin: 0; min-width: 320px; background: radial-gradient(circle at 72% 18%, rgba(105,129,108,.055), transparent 34%), var(--graphite); color: var(--paper); font-family: var(--sans); font-size: 16px; line-height: 1.65; text-rendering: optimizeLegibility; }
@@ -190,3 +192,5 @@ p, h1, h2, h3 { margin-top: 0; }
 @media (prefers-reduced-motion: reduce) {
 	*, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
 }
+
+

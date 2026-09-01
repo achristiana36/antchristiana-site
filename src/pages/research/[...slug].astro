@@ -1,0 +1,27 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { sitePath } from '../../utils/paths';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('research');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+interface Props { post: CollectionEntry<'research'>; }
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article class="article">
+    <a class="back-link" href={sitePath('research/')}>← All research</a>
+    <header>
+      <p class="eyebrow">{post.data.kind} · {post.data.year}{post.data.venue ? ` · ${post.data.venue}` : ''}</p>
+      <h1>{post.data.title}</h1>
+      <p class="article-deck">{post.data.description}</p>
+      {post.data.url && <a class="button-link" href={post.data.url}>Paper or project link ↗</a>}
+    </header>
+    <div class="prose"><Content /></div>
+  </article>
+</BaseLayout>

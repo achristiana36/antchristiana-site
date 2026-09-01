@@ -10,8 +10,8 @@ const posts = (await getCollection('writing', ({ data }) => !data.draft))
 <BaseLayout title="Writing" description="Essays, notes, and writing by Anthony Christiana.">
 	<header class="page-intro page-intro--short">
 		<p class="eyebrow">Writing</p>
-		<h1>Essays, notes, and unfinished lines of thought.</h1>
-		<p>A growing collection of writing about mathematics, education, culture, and whatever else proves difficult to leave alone.</p>
+		<h1>Essays, notes, thoughts.</h1>
+		<p>Writing about mathematics, education, culture, & whatever else.</p>
 	</header>
 	<section class="writing-index">
 		{posts.map((post, index) => (
