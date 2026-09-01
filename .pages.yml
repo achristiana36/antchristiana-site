@@ -82,7 +82,6 @@ content:
         type: string
         description: Research area, Paper, Preprint, Talk, Project, Thesis, or Poster
         required: true
-      - { name: section, label: Site section, type: string, description: "Use research or teaching." }
       - { name: date, label: Display date, type: string, description: "For example: April 24, 2026. If blank, the year is shown." }
       - { name: venue, label: Journal or venue, type: string }
       - { name: authors, label: Authors, type: text }
@@ -108,9 +107,26 @@ content:
     fields:
       - { name: title, label: Course or project title, type: string, required: true }
       - { name: description, label: Short description, type: text, required: true }
-      - { name: term, label: Term, type: string, required: true }
+      - { name: term, label: Term, type: string, description: "For courses and ongoing teaching entries." }
       - { name: institution, label: Institution, type: string }
       - { name: url, label: Course or resource URL, type: string }
+      - { name: year, label: Year, type: number, description: "For talks and projects." }
+      - name: kind
+        label: Type
+        type: string
+        description: Talk or Project for a Teaching post; leave blank for a course entry.
+      - { name: date, label: Display date, type: string, description: "For example: April 24, 2026." }
+      - { name: venue, label: Venue, type: string }
+      - { name: authors, label: Authors, type: text }
+      - { name: status, label: Status, type: text }
+      - { name: arxiv, label: arXiv URL, type: string }
+      - { name: doi, label: DOI or publisher URL, type: string }
+      - { name: pdf, label: Embedded PDF path or URL, type: string, description: "Use a path such as files/talks/slides.pdf or a full https URL." }
+      - { name: pdfReady, label: Show embedded PDF, type: boolean }
+      - { name: youtubeIds, label: YouTube video IDs, type: string, list: true, description: "Use only the ID after youtu.be/ or ?v=. Use TODO as a placeholder." }
+      - { name: videoTitles, label: Video titles, type: string, list: true }
+      - { name: github, label: GitHub project URL, type: string }
+      - { name: showGithubPlaceholder, label: Show GitHub placeholder, type: boolean }
       - { name: featured, label: Featured, type: boolean }
       - { name: body, label: Longer description, type: rich-text }
 

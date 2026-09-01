@@ -1,15 +1,12 @@
-MINIMAL TEACHING-SECTION FIX
+TEACHING-SECTION FIX
 
-Copy the contents of this folder into the root of your existing
-antchristiana-site folder (the folder containing package.json).
-Choose Replace when prompted.
+This is the complete site. Replace your existing antchristiana-site
+folder with this folder, then run the normal build or deployment.
 
-This overlay contains only the six files needed to:
-- show Knots & Invariants in Teaching;
-- show Fibonacci Music & Sonification in Teaching;
-- remove both from the Research index;
-- preserve both existing detail pages and their media; and
-- keep the section field editable through Pages CMS.
+The three requested posts now live in src/content/teaching:
+- Fibonacci Music & Sonification
+- Knots & Invariants
+- Music Theory Mod n
 
-Do not place the minimal-fix folder itself inside the site. Copy its
-contents so that src merges with the site's existing src folder.
+They appear on the Teaching page and use /teaching/... detail URLs.
+They no longer belong to the Research collection or Research index.

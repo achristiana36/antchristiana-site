@@ -10,7 +10,6 @@ videoTitles:
   - Project video
 showGithubPlaceholder: true
 featured: false
-section: teaching
 ---
 
 This project explores sonification: turning mathematical data and relationships into musical material.

@@ -3,14 +3,11 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { sitePath } from '../utils/paths';
 
-const courses = await getCollection('teaching');
-
-const talks = (
-  await getCollection(
-    'research',
-    ({ data }) => data.section === 'teaching'
-  )
-).sort((a, b) => b.data.year - a.data.year);
+const teachingItems = await getCollection('teaching');
+const courses = teachingItems.filter(({ data }) => !data.kind);
+const talks = teachingItems
+  .filter(({ data }) => Boolean(data.kind))
+  .sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0));
 ---
 
 <BaseLayout title="Teaching" description="Teaching, course materials, and an approach to mathematical explanation.">
@@ -55,7 +52,7 @@ const talks = (
           </p>
 
           <h2>
-            <a href={sitePath(`research/${talk.id}/`)}>
+            <a href={sitePath(`teaching/${talk.id}/`)}>
               {talk.data.title}
             </a>
           </h2>
