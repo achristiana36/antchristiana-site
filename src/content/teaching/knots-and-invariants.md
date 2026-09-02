@@ -2,7 +2,7 @@
 title: Knots & Invariants
 description: An introduction to the mathematical study of knots and the invariants used to distinguish them.
 year: 2026
-date: Date to add
+date: February 6
 kind: Talk
 venue: Catholic University of America Math Club
 pdf: files/talks/knots-and-invariants.pdf

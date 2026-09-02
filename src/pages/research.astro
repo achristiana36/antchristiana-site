@@ -4,11 +4,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { sitePath } from '../utils/paths';
 
 
-const items = (
-  await getCollection(
-    'research',
-    ({ data }) => data.section !== 'teaching'
-  )
+const items = (await getCollection('research')).sort(
+	(a, b) => b.data.year - a.data.year
+);
 ---
 
 <BaseLayout title="Research" description="Publications, talks, mathematical music, and projects by Anthony Christiana.">
