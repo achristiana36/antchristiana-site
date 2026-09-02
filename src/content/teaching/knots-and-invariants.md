@@ -7,7 +7,7 @@ kind: Talk
 venue: Catholic University of America Math Club
 pdf: files/talks/knots-and-invariants.pdf
 pdfReady: true
-featured: false
+featured: true
 order: 1
 ---
 
