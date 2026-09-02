@@ -3,7 +3,7 @@ title: On making structure visible
 description: A first note about mathematics, explanation, and the shapes that ideas take.
 date: 2026-08-15
 featured: true
-draft: false
+draft: true
 ---
 
 This is sample text for the writing section. Replace it in Pages CMS with an essay, note, review, or fragment of your own.

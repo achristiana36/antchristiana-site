@@ -1,19 +1,23 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import site from '../data/site.json';
-import { mediaPath, sitePath } from '../utils/paths';
+import { sitePath } from '../utils/paths';
 import HomeHero from '../components/HomeHero.astro';
 
-const writing = (await getCollection('writing', ({ data }) => !data.draft))
-	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const creative = (await getCollection('creative', ({ data }) => !data.draft))
-	.sort((a, b) => b.data.year - a.data.year);
-const research = (await getCollection('research')).sort((a, b) => b.data.year - a.data.year);
 
-const featuredWriting = writing.find((item) => item.data.featured) ?? writing[0];
-const featuredCreative = creative.find((item) => item.data.featured) ?? creative[0];
-const featuredResearch = research.find((item) => item.data.featured) ?? research[0];
+const writing = (
+	await getCollection('writing', ({ data }) => !data.draft)
+).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const research = (
+	await getCollection('research')
+).sort((a, b) => b.data.year - a.data.year);
+
+const featuredWriting =
+	writing.find((item) => item.data.featured) ?? writing[0];
+
+const featuredResearch =
+	research.find((item) => item.data.featured) ?? research[0];
 ---
 
 <BaseLayout>
@@ -24,49 +28,68 @@ const featuredResearch = research.find((item) => item.data.featured) ?? research
 			<p class="kicker">Selected</p>
 			<h2 id="selected-heading">Work across disciplines</h2>
 		</div>
+
 		<div class="feature-grid">
 			{featuredResearch && (
-				<a class="feature-card feature-card--research" href={sitePath('research/')}>
-					<span class="card-number">01</span><span class="card-type">Research</span>
+				<a
+					class="feature-card feature-card--research"
+					href={sitePath('research/')}
+				>
+					<span class="card-number">01</span>
+					<span class="card-type">Research</span>
 					<h3>{featuredResearch.data.title}</h3>
 					<p>{featuredResearch.data.description}</p>
 					<span class="card-arrow" aria-hidden="true">↗</span>
 				</a>
 			)}
+
 			{featuredWriting && (
-				<a class="feature-card" href={sitePath(`writing/${featuredWriting.id}/`)}>
-					<span class="card-number">02</span><span class="card-type">Writing</span>
+				<a
+					class="feature-card"
+					href={sitePath(`writing/${featuredWriting.id}/`)}
+				>
+					<span class="card-number">02</span>
+					<span class="card-type">Writing & Projects</span>
 					<h3>{featuredWriting.data.title}</h3>
 					<p>{featuredWriting.data.description}</p>
 					<span class="card-arrow" aria-hidden="true">↗</span>
 				</a>
 			)}
-			{featuredCreative && (
-				<a class:list={['feature-card', featuredCreative.data.image && 'feature-card--image']} href={sitePath(`creative/${featuredCreative.id}/`)} style={featuredCreative.data.image ? `--image: url('${mediaPath(featuredCreative.data.image)}')` : undefined}>
-					<span class="card-number">03</span><span class="card-type">Creative work</span>
-					<h3>{featuredCreative.data.title}</h3>
-					<p>{featuredCreative.data.description}</p>
-					<span class="card-arrow" aria-hidden="true">↗</span>
-				</a>
-			)}
 		</div>
 	</section>
 
+	{writing.length > 0 && (
+		<section
+			class="section-block latest"
+			aria-labelledby="latest-heading"
+		>
+			<div class="section-heading section-heading--row">
+				<div>
+					<p class="kicker">Notebook</p>
+					<h2 id="latest-heading">Latest writing & projects</h2>
+				</div>
 
-
-	<section class="section-block latest" aria-labelledby="latest-heading">
-		<div class="section-heading section-heading--row">
-			<div><p class="kicker">Notebook</p><h2 id="latest-heading">Latest writing</h2></div>
-			<a class="text-link" href={sitePath('writing/')}>View all</a>
-		</div>
-		<div class="writing-list">
-			{writing.slice(0, 3).map((post) => (
-				<a href={sitePath(`writing/${post.id}/`)}>
-					<time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time>
-					<h3>{post.data.title}</h3>
-					<span aria-hidden="true">↗</span>
+				<a class="text-link" href={sitePath('writing/')}>
+					View all
 				</a>
-			))}
-		</div>
-	</section>
+			</div>
+
+			<div class="writing-list">
+				{writing.slice(0, 3).map((post) => (
+					<a href={sitePath(`writing/${post.id}/`)}>
+						<time datetime={post.data.date.toISOString()}>
+							{post.data.date.toLocaleDateString('en-US', {
+								month: 'short',
+								day: 'numeric',
+								year: 'numeric',
+							})}
+						</time>
+
+						<h3>{post.data.title}</h3>
+						<span aria-hidden="true">↗</span>
+					</a>
+				))}
+			</div>
+		</section>
+	)}
 </BaseLayout>

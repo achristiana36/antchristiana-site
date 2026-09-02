@@ -1,6 +1,6 @@
 ---
 title: Music Theory Mod n
-description: A musical tour of modular arithmetic, pitch classes, and transformations.
+description: A tour of sonification, modular arithmetic, aleatoric music, & more.
 year: 2026
 date: April 24, 2026
 kind: Talk
@@ -10,6 +10,5 @@ pdfReady: true
 featured: false
 ---
 
-Presented for the GW Association for Women in Mathematics, this talk uses modular arithmetic as a language for musical pitch and structure.
 
-> **To finish this post:** add one or two musical examples from the talk, confirm the venue wording, and place the slide PDF at the path shown below.
+<iframe src="https://1drv.ms/p/c/aebf7f425f34c6db/IQSgK9PfANXsSpBIfFS3D3tFAbP-NIW1Of5LyNDLM8VY7kc?em=2&amp;wdAr=1.7777777777777777" width="1428px" height="576px" frameborder="0" title="PowerPoint Viewer">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>

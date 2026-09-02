@@ -48,7 +48,7 @@ const videos = post.data.youtubeIds ?? [];
       <section class="embedded-resource" aria-labelledby="pdf-heading">
         <div class="resource-heading">
           <p class="kicker">{post.data.kind === 'Poster' ? 'Poster' : post.data.kind === 'Paper' || post.data.kind === 'Preprint' ? 'Read the paper' : 'Presentation materials'}</p>
-          <h2 id="pdf-heading">Embedded PDF</h2>
+          <h2 id="pdf-heading"></h2>
         </div>
         {post.data.pdfReady ? (
           <div class="pdf-shell">

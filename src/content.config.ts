@@ -77,4 +77,4 @@ const teaching = defineCollection({
 	}),
 });
 
-export const collections = { writing, creative, research, teaching };
+export const collections = { writing, research, teaching };

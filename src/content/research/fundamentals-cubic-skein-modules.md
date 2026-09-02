@@ -14,4 +14,4 @@ featured: false
 
 This preprint develops foundational constructions and relations for cubic skein modules.
 
-> **To finish this post:** add a concise overview of the objects introduced, the key relations proved, and how the work fits into the broader skein-module literature.
+

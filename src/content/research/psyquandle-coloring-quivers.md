@@ -13,6 +13,3 @@ pdfReady: true
 featured: false
 ---
 
-This article enhances psyquandle counting invariants using quiver structures, extending ideas from quandle coloring quivers to singular knots and pseudoknots.
-
-> **To finish this post:** add one sentence highlighting a favorite example or computation from the paper.

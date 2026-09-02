@@ -1,6 +1,6 @@
 ---
 title: Using Fibonacci Numbers and Chebyshev Polynomials to Express Fox Coloring Groups and Alexander-Burau-Fox Modules of Diagrams of Wheel Graphs
-description: Fibonacci and Chebyshev methods for coloring groups and modules of wheel-graph diagrams.
+description: Computation of Fox Group and Alexander Module for wheel graph diagrams.
 year: 2026
 kind: Paper
 venue: Contemporary Mathematics 834 (2026), 109–129
@@ -14,5 +14,3 @@ featured: false
 ---
 
 This work uses Fibonacci numbers and Chebyshev polynomials to describe algebraic invariants associated with diagrams of wheel graphs.
-
-> **To finish this post:** add a short account of the central theorem, the method, and the connection between the two polynomial families.

@@ -12,6 +12,4 @@ pdfReady: true
 featured: false
 ---
 
-This paper explores homology constructions for quasigroups of Bol-Moufang type.
 
-> **To finish this post:** explain the motivating identities, the invariance questions addressed, and the paper’s principal examples.

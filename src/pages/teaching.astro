@@ -3,64 +3,74 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { sitePath } from '../utils/paths';
 
-const teachingItems = await getCollection('teaching');
-const courses = teachingItems.filter(({ data }) => !data.kind);
-const talks = teachingItems
-  .filter(({ data }) => Boolean(data.kind))
-  .sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0));
+const items = (await getCollection('teaching')).sort((a, b) => {
+	const featuredDifference =
+		Number(b.data.featured) - Number(a.data.featured);
+
+	if (featuredDifference !== 0) {
+		return featuredDifference;
+	}
+
+	return (b.data.year ?? 0) - (a.data.year ?? 0);
+});
 ---
 
-<BaseLayout title="Teaching" description="Teaching, course materials, and an approach to mathematical explanation.">
+<BaseLayout
+	title="Teaching & Outreach"
+	description="Teaching, talks, course materials, and mathematical outreach."
+>
 	<header class="page-intro">
-		<p class="eyebrow">Teaching</p>
+		<p class="eyebrow">Teaching & Outreach</p>
 		<h1>Math Education</h1>
-		<p>I teach math in a variety of settings: university courses, private tutoring, general audience lecturing, & TRIO Upward Bound. I give talks that combine topology, music, art, programming, history, philosophy, and (hopefully) some fun.</p>
+
+		<p>
+			I teach mathematics in university courses, private tutoring,
+			general-audience lectures, and TRIO Upward Bound. My teaching and
+			talks connect mathematics with music, art, programming, history,
+			and philosophy.
+		</p>
 	</header>
-	<section class="statement statement--compact">
-		<p class="kicker">Approach</p>
-		<p>My courses emphasize active problem solving, precise communication, and multiple routes into abstraction. This page can hold syllabi, course notes, and teaching materials as the archive grows.</p>
+
+
+
+	<section class="section-block" aria-labelledby="teaching-heading">
+		<div class="section-heading">
+			<p class="kicker">Teaching & Outreach</p>
+			<h2 id="teaching-heading">Courses, talks, and projects</h2>
+		</div>
+
+		<div class="entry-list">
+			{items.map((item, index) => {
+				const metadata = [
+					item.data.kind,
+					item.data.date ?? item.data.year ?? item.data.term,
+					item.data.venue ?? item.data.institution,
+				]
+					.filter(Boolean)
+					.join(' · ');
+
+				return (
+					<article class="entry-row">
+						<div class="entry-index">
+							{String(index + 1).padStart(2, '0')}
+						</div>
+
+						<div>
+							{metadata && (
+								<p class="entry-meta">{metadata}</p>
+							)}
+
+							<h2>
+								<a href={sitePath(`teaching/${item.id}/`)}>
+									{item.data.title}
+								</a>
+							</h2>
+
+							<p>{item.data.description}</p>
+						</div>
+					</article>
+				);
+			})}
+		</div>
 	</section>
-	<section class="entry-list" aria-label="Courses">
-		{courses.map((course, index) => (
-			<article class="entry-row">
-				<div class="entry-index">{String(index + 1).padStart(2, '0')}</div>
-				<div>
-					<p class="entry-meta">{course.data.term}{course.data.institution ? ` · ${course.data.institution}` : ''}</p>
-					<h2>{course.data.url ? <a href={course.data.url}>{course.data.title}</a> : course.data.title}</h2>
-					<p>{course.data.description}</p>
-				</div>
-			</article>
-		))}
-	</section>
-	<section class="section-block" aria-labelledby="talks-heading">
-  <div class="section-heading">
-    <p class="kicker">Talks & outreach</p>
-    <h2 id="talks-heading">Mathematics for broader audiences</h2>
-  </div>
-
-  <div class="entry-list">
-    {talks.map((talk, index) => (
-      <article class="entry-row">
-        <div class="entry-index">
-          {String(index + 1).padStart(2, '0')}
-        </div>
-
-        <div>
-          <p class="entry-meta">
-            {talk.data.kind} · {talk.data.date ?? talk.data.year}
-            {talk.data.venue ? ` · ${talk.data.venue}` : ''}
-          </p>
-
-          <h2>
-            <a href={sitePath(`teaching/${talk.id}/`)}>
-              {talk.data.title}
-            </a>
-          </h2>
-
-          <p>{talk.data.description}</p>
-        </div>
-      </article>
-    ))}
-  </div>
-</section>
 </BaseLayout>

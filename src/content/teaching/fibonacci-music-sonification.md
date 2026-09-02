@@ -1,17 +1,17 @@
 ---
 title: Fibonacci Music & Sonification
-description: A music-and-mathematics experiment translating Fibonacci structure into sound.
+description: Can sonification support mathematical intuition?
 year: 2026
-date: Year to add
+date: April 24
 kind: Project
 youtubeIds:
-  - TODO
+  - d5buSVjpCKE
+  - myBUnJ9KTOw
 videoTitles:
   - Project video
-showGithubPlaceholder: true
+showGithubPlaceholder: false
 featured: false
 ---
 
-This project explores sonification: turning mathematical data and relationships into musical material.
+These MaxMSP patches were used as demonstration material for my AWM Talk on Math & Music Theory. We can listen to the Fibonacci sequence modulo 12 in order to gain intuition about patterns. This is contrasted with the RSA random number generator modulo 12 which doesn't have any discernible patterns.
 
-> **To finish this post:** describe the project’s origin, what is mapped to pitch or rhythm, and what listeners should notice. Replace the YouTube placeholder with the video ID and add the GitHub URL for the Max/MSP patch.

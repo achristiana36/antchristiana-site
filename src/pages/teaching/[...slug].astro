@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { sitePath } from '../../utils/paths';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('teaching', ({ data }) => Boolean(data.kind));
+ const posts = await getCollection('teaching');
   return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
 }
 
@@ -45,11 +45,10 @@ const videos = post.data.youtubeIds ?? [];
     <div class="prose"><Content /></div>
 
     {post.data.pdf && (
-      <section class="embedded-resource" aria-labelledby="pdf-heading">
-        <div class="resource-heading">
-          <p class="kicker">Presentation materials</p>
-          <h2 id="pdf-heading">Embedded PDF</h2>
-        </div>
+     <section class="embedded-resource" aria-label="Presentation materials">
+	  <div class="resource-heading">
+		<p class="kicker">Presentation materials</p>
+	  </div>
         {post.data.pdfReady ? (
           <div class="pdf-shell">
             <iframe src={pdfSrc} title={`PDF: ${post.data.title}`}></iframe>
@@ -65,11 +64,10 @@ const videos = post.data.youtubeIds ?? [];
     )}
 
     {videos.length > 0 && (
-      <section class="embedded-resource" aria-labelledby="video-heading">
-        <div class="resource-heading">
-          <p class="kicker">Watch & listen</p>
-          <h2 id="video-heading">{videos.length > 1 ? 'Video archive' : 'Project video'}</h2>
-        </div>
+     <section class="embedded-resource" aria-label="Watch and listen">
+	<div class="resource-heading">
+		<p class="kicker">Watch & listen</p>
+	</div>
         <div class:list={['video-grid', videos.length === 1 && 'video-grid--single']}>
           {videos.map((videoId, index) => videoId !== 'TODO' ? (
             <div class="video-item">
