@@ -1,6 +1,6 @@
 ---
 title: Music Theory Mod n
-description: A tour of sonification, modular arithmetic, aleatoric music, & more.
+description: A tour of sonification, modular arithmetic, aleatoric music, and related ideas.
 year: 2026
 date: April 24, 2026
 kind: Talk

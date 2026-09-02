@@ -7,23 +7,13 @@ const writing = defineCollection({
 		title: z.string(),
 		description: z.string(),
 		date: z.coerce.date(),
+		type: z.enum(['Writing', 'Project']).default('Writing'),
+		youtubeIds: z.array(z.string()).optional(),
+		videoTitles: z.array(z.string()).optional(),
+		github: z.string().url().optional(),
 		featured: z.boolean().default(false),
 		draft: z.boolean().default(false),
 		image: z.string().optional(),
-	}),
-});
-
-const creative = defineCollection({
-	loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/creative' }),
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		year: z.number(),
-		medium: z.string(),
-		featured: z.boolean().default(false),
-		draft: z.boolean().default(false),
-		image: z.string().optional(),
-		externalUrl: z.string().url().optional(),
 	}),
 });
 
@@ -48,6 +38,7 @@ const research = defineCollection({
 		github: z.string().url().optional(),
 		showGithubPlaceholder: z.boolean().default(false),
 		featured: z.boolean().default(false),
+		featuredOrder: z.number().optional(),
 	}),
 });
 
@@ -74,6 +65,8 @@ const teaching = defineCollection({
 		github: z.string().url().optional(),
 		showGithubPlaceholder: z.boolean().default(false),
 		featured: z.boolean().default(false),
+		featuredOrder: z.number().optional(),
+		order: z.number().default(999),
 	}),
 });
 

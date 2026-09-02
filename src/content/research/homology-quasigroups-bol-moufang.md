@@ -5,11 +5,10 @@ year: 2025
 kind: Preprint
 venue: Conference proceedings
 authors: Anthony Christiana, Ben Clingenpeel, Huizheng Guo, Jinseok Oh, Józef H. Przytycki, and Anna Zamojska-Dzienio
-status: Conditionally accepted for conference proceedings; a revised version has been submitted. This wording follows the August 2026 CV and should be updated once the proceedings citation is final.
+status: Conditionally accepted for conference proceedings; a revised version has been submitted.
 arxiv: https://arxiv.org/abs/2508.21268
 pdf: https://arxiv.org/pdf/2508.21268
 pdfReady: true
 featured: false
 ---
-
 

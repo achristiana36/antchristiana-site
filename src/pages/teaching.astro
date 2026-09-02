@@ -11,6 +11,11 @@ const items = (await getCollection('teaching')).sort((a, b) => {
 		return featuredDifference;
 	}
 
+	const orderDifference = a.data.order - b.data.order;
+	if (orderDifference !== 0) {
+		return orderDifference;
+	}
+
 	return (b.data.year ?? 0) - (a.data.year ?? 0);
 });
 ---

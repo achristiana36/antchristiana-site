@@ -6,7 +6,7 @@ featured: false
 draft: false
 ---
 
-I'm somewhat surprised that this paper has been read, much less that it has been cited in academic work! At this point, I cringe at my undergraduate writing style, but I like the central ides and sometimes consider polishing this piece...
+I'm somewhat surprised that this paper has been read, much less that it has been cited in academic work! I like to think my writing has come a long way since university, but I still like the central idea of this piece.
 
 
 ---

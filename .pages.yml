@@ -30,7 +30,7 @@ content:
           - { name: url, label: Profile URL, type: string, required: true }
 
   - name: writing
-    label: Writing
+    label: Writing & Projects
     type: collection
     path: src/content/writing
     format: yaml-frontmatter
@@ -39,6 +39,10 @@ content:
       - { name: title, label: Title, type: string, required: true }
       - { name: description, label: Short description, type: text, required: true }
       - { name: date, label: Publication date, type: date, required: true }
+      - { name: type, label: Type, type: string, description: "Use Writing or Project." }
+      - { name: youtubeIds, label: YouTube video IDs, type: string, list: true, description: "For project posts, use only the ID after youtu.be/ or ?v=." }
+      - { name: videoTitles, label: Video titles, type: string, list: true }
+      - { name: github, label: GitHub project URL, type: string }
       - { name: featured, label: Feature on homepage, type: boolean }
       - { name: draft, label: Hide as draft, type: boolean }
       - { name: image, label: Cover image, type: image }
@@ -46,26 +50,6 @@ content:
         label: Article
         type: rich-text
         options: { media: true, path: public/images/writing }
-
-  - name: creative
-    label: Creative work
-    type: collection
-    path: src/content/creative
-    format: yaml-frontmatter
-    view: { primary: title, sort: year, order: desc }
-    fields:
-      - { name: title, label: Title, type: string, required: true }
-      - { name: description, label: Short description, type: text, required: true }
-      - { name: year, label: Year, type: number, required: true }
-      - { name: medium, label: Medium or form, type: string, required: true }
-      - { name: featured, label: Feature on homepage, type: boolean }
-      - { name: draft, label: Hide as draft, type: boolean }
-      - { name: image, label: Cover image, type: image }
-      - { name: externalUrl, label: External project URL, type: string }
-      - name: body
-        label: Project description
-        type: rich-text
-        options: { media: true, path: public/images/creative }
 
   - name: research
     label: Research
@@ -96,6 +80,7 @@ content:
       - { name: github, label: GitHub project URL, type: string }
       - { name: showGithubPlaceholder, label: Show GitHub placeholder, type: boolean }
       - { name: featured, label: Feature on homepage, type: boolean }
+      - { name: featuredOrder, label: Homepage featured order, type: number, description: "Use 1, 2, 3, and so on for featured items." }
       - { name: body, label: Longer description, type: rich-text }
 
   - name: teaching
@@ -128,6 +113,8 @@ content:
       - { name: github, label: GitHub project URL, type: string }
       - { name: showGithubPlaceholder, label: Show GitHub placeholder, type: boolean }
       - { name: featured, label: Featured, type: boolean }
+      - { name: featuredOrder, label: Homepage featured order, type: number, description: "Use 1, 2, 3, and so on for featured items." }
+      - { name: order, label: Teaching page order, type: number, description: "Lower numbers appear first." }
       - { name: body, label: Longer description, type: rich-text }
 
 settings:

@@ -45,10 +45,9 @@ const videos = post.data.youtubeIds ?? [];
     <div class="prose"><Content /></div>
 
     {post.data.pdf && (
-      <section class="embedded-resource" aria-labelledby="pdf-heading">
+      <section class="embedded-resource" aria-label={post.data.kind === 'Poster' ? 'Poster' : post.data.kind === 'Paper' || post.data.kind === 'Preprint' ? 'Read the paper' : 'Presentation materials'}>
         <div class="resource-heading">
           <p class="kicker">{post.data.kind === 'Poster' ? 'Poster' : post.data.kind === 'Paper' || post.data.kind === 'Preprint' ? 'Read the paper' : 'Presentation materials'}</p>
-          <h2 id="pdf-heading"></h2>
         </div>
         {post.data.pdfReady ? (
           <div class="pdf-shell">
@@ -65,10 +64,9 @@ const videos = post.data.youtubeIds ?? [];
     )}
 
     {videos.length > 0 && (
-      <section class="embedded-resource" aria-labelledby="video-heading">
+      <section class="embedded-resource" aria-label="Watch and listen">
         <div class="resource-heading">
           <p class="kicker">Watch & listen</p>
-          <h2 id="video-heading">{videos.length > 1 ? 'Video archive' : 'Project video'}</h2>
         </div>
         <div class:list={['video-grid', videos.length === 1 && 'video-grid--single']}>
           {videos.map((videoId, index) => videoId !== 'TODO' ? (

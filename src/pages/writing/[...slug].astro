@@ -10,17 +10,45 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+const videos = post.data.youtubeIds ?? [];
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
 	<article class="article">
 		<a class="back-link" href={sitePath('writing/')}>← All writing and projects</a>
 		<header>
-			<p class="eyebrow">Writing</p>
+			<p class="eyebrow">{post.data.type}</p>
 			<h1>{post.data.title}</h1>
 			<p class="article-deck">{post.data.description}</p>
 			<time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time>
 		</header>
+		{post.data.github && (
+			<nav class="resource-links" aria-label="Links for this project">
+				<a href={post.data.github}>Project files on GitHub <span aria-hidden="true">↗</span></a>
+			</nav>
+		)}
 		<div class="prose"><Content /></div>
+		{videos.length > 0 && (
+			<section class="embedded-resource" aria-label="Watch and listen">
+				<div class="resource-heading">
+					<p class="kicker">Watch & listen</p>
+				</div>
+				<div class:list={['video-grid', videos.length === 1 && 'video-grid--single']}>
+					{videos.map((videoId, index) => (
+						<div class="video-item">
+							<div class="video-frame">
+								<iframe
+									src={`https://www.youtube-nocookie.com/embed/${videoId}`}
+									title={post.data.videoTitles?.[index] ?? `${post.data.title} video ${index + 1}`}
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+									allowfullscreen
+								></iframe>
+							</div>
+							{post.data.videoTitles?.[index] && <p>{post.data.videoTitles[index]}</p>}
+						</div>
+					))}
+				</div>
+			</section>
+		)}
 	</article>
 </BaseLayout>

@@ -7,18 +7,20 @@ const posts = (await getCollection('writing', ({ data }) => !data.draft))
 	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<BaseLayout title="Writing" description="Essays, notes, and writing by Anthony Christiana.">
+<BaseLayout title="Writing & Projects" description="Writing and interdisciplinary projects by Anthony Christiana.">
 	<header class="page-intro page-intro--short">
-		<p class="eyebrow">Writing</p>
-		<h1>Essays, notes, thoughts.</h1>
-		<p>Writing about mathematics, education, culture, & whatever else.</p>
+		<p class="eyebrow">Writing & Projects</p>
+		<h1>Essays, notes, and selected projects.</h1>
+		<p>Writing on mathematics, music, education, digital culture, and interdisciplinary projects.</p>
 	</header>
 	<section class="writing-index">
 		{posts.map((post, index) => (
 			<a href={sitePath(`writing/${post.id}/`)}>
 				<div class="writing-index-number">{String(index + 1).padStart(2, '0')}</div>
 				<div>
-					<time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time>
+					<p class="entry-meta">
+						{post.data.type} · <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time>
+					</p>
 					<h2>{post.data.title}</h2>
 					<p>{post.data.description}</p>
 				</div>

@@ -13,11 +13,26 @@ const research = (
 	await getCollection('research')
 ).sort((a, b) => b.data.year - a.data.year);
 
-const featuredWriting =
-	writing.find((item) => item.data.featured) ?? writing[0];
+const teaching = await getCollection('teaching');
 
-const featuredResearch =
-	research.find((item) => item.data.featured) ?? research[0];
+const selectedWork = [
+	...research.map((item) => ({
+		item,
+		section: 'Research',
+		href: sitePath(`research/${item.id}/`),
+	})),
+	...teaching.map((item) => ({
+		item,
+		section: 'Teaching & Outreach',
+		href: sitePath(`teaching/${item.id}/`),
+	})),
+]
+	.filter(({ item }) => item.data.featured)
+	.sort(
+		(a, b) =>
+			(a.item.data.featuredOrder ?? 999) -
+			(b.item.data.featuredOrder ?? 999),
+	);
 ---
 
 <BaseLayout>
@@ -30,31 +45,23 @@ const featuredResearch =
 		</div>
 
 		<div class="feature-grid">
-			{featuredResearch && (
+			{selectedWork.map((work, index) => (
 				<a
-					class="feature-card feature-card--research"
-					href={sitePath('research/')}
+					class:list={[
+						'feature-card',
+						work.section === 'Research' && 'feature-card--research',
+					]}
+					href={work.href}
 				>
-					<span class="card-number">01</span>
-					<span class="card-type">Research</span>
-					<h3>{featuredResearch.data.title}</h3>
-					<p>{featuredResearch.data.description}</p>
+					<span class="card-number">
+						{String(index + 1).padStart(2, '0')}
+					</span>
+					<span class="card-type">{work.section}</span>
+					<h3>{work.item.data.title}</h3>
+					<p>{work.item.data.description}</p>
 					<span class="card-arrow" aria-hidden="true">↗</span>
 				</a>
-			)}
-
-			{featuredWriting && (
-				<a
-					class="feature-card"
-					href={sitePath(`writing/${featuredWriting.id}/`)}
-				>
-					<span class="card-number">02</span>
-					<span class="card-type">Writing & Projects</span>
-					<h3>{featuredWriting.data.title}</h3>
-					<p>{featuredWriting.data.description}</p>
-					<span class="card-arrow" aria-hidden="true">↗</span>
-				</a>
-			)}
+			))}
 		</div>
 	</section>
 
