@@ -18,6 +18,8 @@ const requestedCv = publicSite.cv?.trim() || 'files/Anthony-Christiana-CV.pdf';
 const externalCv = webUrl(requestedCv);
 const localCv = requestedCv.replace(/^\/+/, '');
 const cvHref = externalCv || (existsSync(resolve('public', localCv)) ? sitePath(localCv) : '');
+const teachingStatementHref = sitePath('files/Anthony-Christiana-Teaching-Statement.pdf');
+const researchStatementHref = sitePath('files/Anthony-Christiana-Research-Statement.pdf');
 const profiles = [
   { label: 'LinkedIn', url: publicSite.linkedin || '' },
   { label: 'GitHub', url: site.github || '' },
@@ -30,7 +32,7 @@ const email = site.email?.trim();
   <header class="cv-intro">
     <p class="eyebrow">{site.name}</p>
     <h1>CV &amp; Contact</h1>
-    <p>Academic experience, contact information, and profiles elsewhere.</p>
+    <p>Curriculum vitae, teaching record, research, and contact information.</p>
   </header>
 
   <div class="cv-contact-grid">
@@ -42,6 +44,12 @@ const email = site.email?.trim();
           <p>My research, teaching, publications, and professional experience.</p>
           <a class="cv-download" href={cvHref} download={externalCv ? undefined : 'Anthony-Christiana-CV.pdf'}>Download CV (PDF) <span aria-hidden="true">↓</span></a>
           <a class="cv-open" href={cvHref} target="_blank" rel="noopener noreferrer">Open PDF in a new tab <span aria-hidden="true">↗</span></a>
+          <div class="cv-related">
+            <a href={teachingStatementHref} target="_blank" rel="noopener noreferrer">Teaching statement <span aria-hidden="true">↗</span></a>
+            <a href={researchStatementHref} target="_blank" rel="noopener noreferrer">Research statement <span aria-hidden="true">↗</span></a>
+            <a href={sitePath('teaching/')}>Teaching record <span aria-hidden="true">↗</span></a>
+            <a href={sitePath('research/')}>Research &amp; publications <span aria-hidden="true">↗</span></a>
+          </div>
         </>
       ) : (
         <>
@@ -80,6 +88,9 @@ const email = site.email?.trim();
   .cv-download { display: inline-flex; gap: 1.3rem; align-items: center; margin-top: 1rem; padding: .85rem 1.1rem; border: 1px solid var(--green); font-size: .85rem; }
   .cv-download:hover { background: var(--graphite-raised); }
   .cv-open { display: block; width: fit-content; margin-top: 1.25rem; color: var(--paper-soft); font-size: .8rem; text-decoration: underline; text-underline-offset: .3em; }
+  .cv-related { display: flex; flex-wrap: wrap; gap: .75rem 1.2rem; margin-top: 2rem; }
+  .cv-related a { color: var(--green-bright); font-size: .78rem; }
+  .cv-related a:hover { color: var(--paper); }
   .contact-profiles { list-style: none; margin: 0; padding: 0; }
   .contact-profiles li { border-bottom: 1px solid var(--line); }
   .contact-profiles a { display: grid; grid-template-columns: 85px minmax(0,1fr) 16px; gap: 1rem; padding: 1rem 0; align-items: baseline; }

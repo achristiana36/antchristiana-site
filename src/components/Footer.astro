@@ -10,9 +10,10 @@ import { sitePath } from '../utils/paths';
 	</div>
 	<div class="footer-links">
 		{site.email && <a href={`mailto:${site.email}`}>Email</a>}
+		<a href={sitePath('teaching/')}>Teaching</a>
+		<a href={sitePath('research/')}>Research</a>
 		{site.github && <a href={site.github} rel="me">GitHub</a>}
 		<a href={sitePath('cv/')}>CV &amp; Contact</a>
-		<a href={sitePath('writing/')}>Writing</a>
 	</div>
 	<p class="footer-mark">Built as a quiet place for ongoing work. © {new Date().getFullYear()}</p>
 </footer>

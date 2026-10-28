@@ -7,13 +7,15 @@ import { sitePath } from '../utils/paths';
 const items = (await getCollection('research')).sort(
 	(a, b) => b.data.year - a.data.year
 );
+const researchStatementHref = sitePath('files/Anthony-Christiana-Research-Statement.pdf');
 ---
 
 <BaseLayout title="Research" description="Publications, talks, mathematical music, and projects by Anthony Christiana.">
 	<header class="page-intro">
 		<p class="eyebrow">Research</p>
 		<h1>Papers, talks & projects</h1>
-		<p>My work moves through knot theory, diagram algebras, graph theory, and mathematical music. Each entry gathers the paper, slides, video, code, or presentation materials in one place.</p>
+		<p>Knot theory, diagram algebras, graph theory, and mathematical music. Entries link to papers, slides, video, code, and presentation materials.</p>
+		<a class="button-link statement-link" href={researchStatementHref} target="_blank" rel="noopener noreferrer">Research statement (PDF)</a>
 	</header>
 	<section class="entry-list" aria-label="Research projects and publications">
 		{items.map((item, index) => (
@@ -29,3 +31,7 @@ const items = (await getCollection('research')).sort(
 		))}
 	</section>
 </BaseLayout>
+
+<style>
+	.statement-link { margin-top: 1.75rem; }
+</style>

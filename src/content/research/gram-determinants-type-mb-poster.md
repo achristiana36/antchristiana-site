@@ -7,8 +7,7 @@ kind: Poster
 venue: CCAS Research Showcase · George Washington University · Washington, DC
 pdf: files/posters/gram-determinants-type-mb.pdf
 pdfReady: true
-featured: true
-featuredOrder: 2
+featured: false
 ---
 
 

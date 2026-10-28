@@ -1,0 +1,104 @@
+{
+  "experience": [
+    {
+      "role": "Instructor of record",
+      "course": "MATH 1221 · Calculus with Precalculus 2",
+      "institution": "George Washington University",
+      "terms": "Summer 2026"
+    },
+    {
+      "role": "Instructor of record",
+      "course": "MATH 1007 · Mathematics and Politics",
+      "institution": "George Washington University",
+      "terms": "Summers 2023, 2024, 2026"
+    },
+    {
+      "role": "Instructor of record",
+      "course": "MATH 111 · Calculus for Social & Life Sciences",
+      "institution": "Catholic University of America",
+      "terms": "Summer 2025"
+    },
+    {
+      "role": "Teaching assistant",
+      "course": "MATH 1009 · Mathematical Ideas",
+      "institution": "George Washington University",
+      "terms": "Fall 2024–Spring 2026"
+    },
+    {
+      "role": "Teaching assistant",
+      "course": "MATH 1231/1232 · Single-Variable Calculus I–II",
+      "institution": "George Washington University",
+      "terms": "Fall 2022–Spring 2024"
+    },
+    {
+      "role": "Guest teaching",
+      "course": "Graph Theory",
+      "institution": "Georgetown University",
+      "terms": "Spring 2026"
+    },
+    {
+      "role": "Guest teaching",
+      "course": "Graph Theory, Advanced Graph Theory & Combinatorics",
+      "institution": "Catholic University of America",
+      "terms": "2025–2026"
+    }
+  ],
+  "outreach": {
+    "title": "TRIO Upward Bound math instructor",
+    "terms": "Summers 2023–2025",
+    "description": "Mathematics instructor for a federal college-bridge program serving low-income students in Washington, DC."
+  },
+  "recognition": {
+    "title": "Graduate Student Teaching Award",
+    "institution": "George Washington University Department of Mathematics",
+    "year": "2026",
+    "url": "https://math.columbian.gwu.edu/2026-mathematics-newsletter"
+  },
+  "documents": {
+    "teachingStatement": {
+      "title": "Teaching statement",
+      "detail": "2 pages",
+      "path": "files/Anthony-Christiana-Teaching-Statement.pdf"
+    },
+    "teachingEvaluation": {
+      "title": "Teaching evaluation summary",
+      "detail": "Selected results and feedback · 2 pages",
+      "path": "files/Anthony-Christiana-Teaching-Evaluation-Summary.pdf"
+    },
+    "sampleMaterials": [
+      {
+        "title": "Upward Bound graph theory final project",
+        "detail": "Project brief and poster assignment · 4 pages",
+        "path": "files/teaching/Upward-Bound-Graph-Theory-Final-Project.pdf"
+      },
+      {
+        "title": "Knot invariants teaching materials",
+        "detail": "Lecture notes and activities · 9 pages",
+        "path": "files/teaching/Knot-Invariants-Teaching-Materials.pdf"
+      }
+    ],
+    "syllabi": [
+      {
+        "course": "MATH 1007",
+        "title": "Mathematics and Politics",
+        "institution": "George Washington University",
+        "term": "Summer 2026",
+        "path": "files/teaching/Mathematics-and-Politics-Syllabus.pdf"
+      },
+      {
+        "course": "MATH 1221",
+        "title": "Calculus with Precalculus II",
+        "institution": "George Washington University",
+        "term": "Summer 2026",
+        "path": "files/teaching/Calculus-with-Precalculus-II-Syllabus.pdf"
+      },
+      {
+        "course": "MATH 111",
+        "title": "Calculus for Social & Life Sciences",
+        "institution": "Catholic University of America",
+        "term": "Summer 2025",
+        "path": "files/teaching/Math-111-Syllabus.pdf"
+      }
+    ]
+  }
+}

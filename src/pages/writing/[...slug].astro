@@ -20,7 +20,7 @@ const videos = post.data.youtubeIds ?? [];
 			<p class="eyebrow">{post.data.type}</p>
 			<h1>{post.data.title}</h1>
 			<p class="article-deck">{post.data.description}</p>
-			<time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time>
+			<time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</time>
 		</header>
 		{post.data.github && (
 			<nav class="resource-links" aria-label="Links for this project">
@@ -40,6 +40,7 @@ const videos = post.data.youtubeIds ?? [];
 								<iframe
 									src={`https://www.youtube-nocookie.com/embed/${videoId}`}
 									title={post.data.videoTitles?.[index] ?? `${post.data.title} video ${index + 1}`}
+									loading="lazy"
 									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 									allowfullscreen
 								></iframe>

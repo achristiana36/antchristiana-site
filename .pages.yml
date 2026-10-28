@@ -14,6 +14,9 @@ content:
       - { name: name, label: Name, type: string, required: true }
       - { name: eyebrow, label: Small homepage line, type: string, required: true }
       - { name: headline, label: Homepage headline, type: text, required: true }
+      - { name: role, label: Academic role, type: string, required: true }
+      - { name: institution, label: Institution, type: string, required: true }
+      - { name: expectedGraduation, label: Expected graduation, type: string }
       - { name: introduction, label: Short introduction, type: text, required: true }
       - { name: about, label: About summary, type: text, required: true }
       - { name: location, label: Location, type: string }
@@ -28,6 +31,73 @@ content:
         fields:
           - { name: label, label: Platform name, type: string, required: true }
           - { name: url, label: Profile URL, type: string, required: true }
+
+  - name: teaching_record
+    label: Teaching record
+    type: file
+    path: src/data/teaching.json
+    format: json
+    fields:
+      - name: experience
+        label: University teaching
+        type: object
+        list: true
+        fields:
+          - { name: role, label: Role, type: string, required: true }
+          - { name: course, label: Course, type: string, required: true }
+          - { name: institution, label: Institution, type: string, required: true }
+          - { name: terms, label: Terms, type: string, required: true }
+      - name: outreach
+        label: Outreach highlight
+        type: object
+        fields:
+          - { name: title, label: Title, type: string, required: true }
+          - { name: terms, label: Terms, type: string, required: true }
+          - { name: description, label: Description, type: text, required: true }
+      - name: recognition
+        label: Teaching recognition
+        type: object
+        fields:
+          - { name: title, label: Award, type: string, required: true }
+          - { name: institution, label: Institution, type: string, required: true }
+          - { name: year, label: Year, type: string, required: true }
+          - { name: url, label: Verification URL, type: string }
+      - name: documents
+        label: Teaching documents
+        type: object
+        fields:
+          - name: teachingStatement
+            label: Teaching statement
+            type: object
+            fields:
+              - { name: title, label: Title, type: string, required: true }
+              - { name: detail, label: Short detail, type: string, required: true }
+              - { name: path, label: PDF path, type: string, required: true }
+          - name: teachingEvaluation
+            label: Teaching evaluation summary
+            type: object
+            fields:
+              - { name: title, label: Title, type: string, required: true }
+              - { name: detail, label: Short detail, type: string, required: true }
+              - { name: path, label: PDF path, type: string, required: true }
+          - name: sampleMaterials
+            label: Selected course materials
+            type: object
+            list: true
+            fields:
+              - { name: title, label: Title, type: string, required: true }
+              - { name: detail, label: Short detail, type: string, required: true }
+              - { name: path, label: PDF path, type: string, required: true }
+          - name: syllabi
+            label: Selected syllabi
+            type: object
+            list: true
+            fields:
+              - { name: course, label: Course number, type: string, required: true }
+              - { name: title, label: Course title, type: string, required: true }
+              - { name: institution, label: Institution, type: string, required: true }
+              - { name: term, label: Term, type: string, required: true }
+              - { name: path, label: PDF path, type: string, required: true }
 
   - name: writing
     label: Writing & Projects
@@ -99,7 +169,7 @@ content:
       - name: kind
         label: Type
         type: string
-        description: Talk or Project for a Teaching post; leave blank for a course entry.
+        description: Course, Talk, Project, Guest lecture, or Outreach.
       - { name: date, label: Display date, type: string, description: "For example: April 24, 2026." }
       - { name: venue, label: Venue, type: string }
       - { name: authors, label: Authors, type: text }

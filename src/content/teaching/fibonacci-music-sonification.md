@@ -1,17 +1,19 @@
 ---
 title: Fibonacci Music & Sonification
-description: Can sonification support mathematical intuition?
+description: Two Max/MSP demonstrations mapping integer sequences modulo 12 to pitch classes.
 year: 2026
-date: April 24
+date: April 24, 2026
 kind: Project
 youtubeIds:
   - d5buSVjpCKE
   - myBUnJ9KTOw
 videoTitles:
-  - Project video
+  - Fibonacci sequence modulo 12
+  - RSA pseudorandom sequence modulo 12
 showGithubPlaceholder: false
 featured: false
+order: 3
 ---
 
-These MaxMSP patches were used as demonstration material for my AWM Talk on Math & Music Theory. We can listen to the Fibonacci sequence modulo 12 in order to gain intuition about patterns. This is contrasted with the RSA random number generator modulo 12 which doesn't have any discernible patterns.
+Developed as demonstration material for *Music Theory Mod n*. The first patch sonifies the Fibonacci sequence modulo 12; the second uses an RSA pseudorandom sequence as a contrast.
 

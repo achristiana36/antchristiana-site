@@ -15,7 +15,7 @@ const pdfSrc = post.data.pdf ? sitePath(post.data.pdf) : undefined;
 const videos = post.data.youtubeIds ?? [];
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description} socialImage={false}>
+<BaseLayout title={post.data.title} description={post.data.description}>
   <article class="article article--resource">
     <a class="back-link" href={sitePath('research/')}>← All research</a>
     <header>
@@ -51,8 +51,8 @@ const videos = post.data.youtubeIds ?? [];
         </div>
         {post.data.pdfReady ? (
           <div class="pdf-shell">
-            <iframe src={pdfSrc} title={`PDF: ${post.data.title}`}></iframe>
-            <a href={pdfSrc}>Open PDF in a new tab <span aria-hidden="true">↗</span></a>
+            <iframe src={pdfSrc} title={`PDF: ${post.data.title}`} loading="lazy"></iframe>
+            <a href={pdfSrc} target="_blank" rel="noopener noreferrer">Open PDF in a new tab <span aria-hidden="true">↗</span></a>
           </div>
         ) : (
           <div class="fill-placeholder">
@@ -75,6 +75,7 @@ const videos = post.data.youtubeIds ?? [];
                 <iframe
                   src={`https://www.youtube-nocookie.com/embed/${videoId}`}
                   title={post.data.videoTitles?.[index] ?? `${post.data.title} video ${index + 1}`}
+                  loading="lazy"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowfullscreen
                 ></iframe>

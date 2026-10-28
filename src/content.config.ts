@@ -51,7 +51,7 @@ const teaching = defineCollection({
 		institution: z.string().optional(),
 		url: z.string().url().optional(),
 		year: z.number().optional(),
-		kind: z.enum(['Research area', 'Paper', 'Preprint', 'Talk', 'Project', 'Thesis', 'Poster']).optional(),
+		kind: z.enum(['Course', 'Talk', 'Project', 'Guest lecture', 'Outreach']).optional(),
 		date: z.string().optional(),
 		venue: z.string().optional(),
 		authors: z.string().optional(),

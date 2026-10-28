@@ -2,15 +2,24 @@
 title: Knots & Invariants
 description: An introduction to the mathematical study of knots and the invariants used to distinguish them.
 year: 2026
-date: February 6
+date: February 6, 2026
 kind: Talk
 venue: Catholic University of America Math Club
-pdf: files/talks/knots-and-invariants.pdf
+pdf: files/teaching/Knot-Invariants-Teaching-Materials.pdf
 pdfReady: true
 featured: true
-featuredOrder: 3
+featuredOrder: 1
 order: 1
 ---
 
-This talk introduces knots as mathematical objects and asks how one can tell two knots apart. It moves from diagrams and Reidemeister moves toward the idea of an invariant, using accessible examples for a Math Club audience.
+## Audience and format
+
+Catholic University of America Math Club. Participants made and compared physical knots, organized examples, and translated them into diagrams.
+
+## Topics
+
+- Knot equivalence and ambient isotopy
+- Reidemeister moves
+- Invariants used to distinguish knots
+- Moving between physical models and planar diagrams
 

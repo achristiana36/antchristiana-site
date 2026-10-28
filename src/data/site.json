@@ -1,13 +1,16 @@
 {
   "name": "Anthony Christiana",
-  "eyebrow": "Mathematics · Teaching · Writing",
-  "headline": "Knot Theorist",
-  "introduction": "I am a PhD Candidate in Mathematics at George Washington University studying under Józef Przytycki. I am interested in Knot Theory, Diagrammatic Algebras, Graph Theory, and Representation Theory.",
-  "about": "This site gathers my research, teaching, and other projects.",
+  "eyebrow": "Mathematics · Teaching · Research",
+  "headline": "Mathematics educator and knot theorist",
+  "role": "PhD candidate in Mathematics · Instructor of record",
+  "institution": "George Washington University",
+  "expectedGraduation": "PhD expected May 2027",
+  "introduction": "Instructor of record in calculus and Mathematics and Politics. Research in knot theory and related algebraic structures.",
+  "about": "Teaching record, publications, and selected projects.",
   "location": "Washington, DC",
   "email": "anthonyjchristiana@gmail.com",
   "github": "https://github.com/achristiana36",
-  "cv": "",
+  "cv": "files/Anthony-Christiana-CV.pdf",
   "linkedin": "https://www.linkedin.com/in/anthony-christiana-6a8363223/",
   "socials": []
 }
