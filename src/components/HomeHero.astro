@@ -8,7 +8,6 @@ interface Props {
   heading?: string;
   eyebrow?: string;
   headline?: string;
-  role?: string;
   institution?: string;
   graduation?: string;
   photoPosition?: string;
@@ -18,7 +17,6 @@ const {
   heading = site.name,
   eyebrow = site.eyebrow,
   headline = site.headline,
-  role = site.role,
   institution = site.institution,
   graduation = site.expectedGraduation,
   photoPosition = '50% 35%',
@@ -30,13 +28,12 @@ const {
     <h1 id="home-name">{heading}</h1>
     <p class="home-portrait-hero__headline">{headline}</p>
     <p class="home-portrait-hero__role">
-      {role}<br />
-      <span>{institution} · {graduation}</span>
+      {institution} · <span>{graduation}</span>
     </p>
     <p class="home-portrait-hero__introduction">{site.introduction}</p>
     <div class="home-portrait-hero__actions">
-      <a class="home-portrait-hero__primary" href={sitePath('teaching/')}>Explore teaching <span aria-hidden="true">↗</span></a>
-      <a class="home-portrait-hero__secondary" href={sitePath('research/')}>View research</a>
+      <a class="home-portrait-hero__primary" href={sitePath('teaching/')}>Teaching <span aria-hidden="true">↗</span></a>
+      <a class="home-portrait-hero__secondary" href={sitePath('research/')}>Research</a>
       <a class="home-portrait-hero__secondary" href={sitePath(site.cv)} download>Download CV</a>
     </div>
   </div>

@@ -66,8 +66,6 @@ p, h1, h2, h3 { margin-top: 0; }
 .feature-card { position: relative; min-height: 440px; padding: 2rem; display: flex; flex-direction: column; border: 1px solid var(--line); background: var(--graphite-soft); transition: transform .25s ease, background .25s ease, border-color .25s ease; }
 .feature-card + .feature-card { border-left: 0; }
 .feature-card:hover { z-index: 2; transform: translateY(-8px); background: var(--graphite-raised); border-color: rgba(145,168,143,.5); }
-.feature-card--accent { background: var(--green); color: #111512; }
-.feature-card--accent:hover { background: #78907a; }
 .feature-card--image::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(25,28,26,.95), rgba(25,28,26,.3)), var(--image) center/cover; opacity: .65; }
 .feature-card > * { position: relative; z-index: 1; }
 .card-number { font: 400 1rem var(--serif); opacity: .75; }
@@ -75,7 +73,6 @@ p, h1, h2, h3 { margin-top: 0; }
 .feature-card h3 { margin: 1.1rem 0 .8rem; font: 400 clamp(1.6rem, 2.5vw, 2.3rem)/1.08 var(--serif); letter-spacing: -.025em; }
 .feature-card p { margin: 0 2rem 0 0; font-size: .88rem; line-height: 1.55; opacity: .75; }
 .card-arrow { position: absolute; right: 2rem; bottom: 2rem; color: var(--green-bright); }
-.feature-card--accent .card-arrow { color: #111512; }
 
 .statement { display: grid; grid-template-columns: 1fr 4fr; gap: 3rem; padding: clamp(5rem, 10vw, 9rem) 0; border-bottom: 1px solid var(--line); }
 .statement > p:last-child { max-width: 970px; margin: 0; color: var(--paper-soft); font: 400 clamp(2rem, 4.4vw, 4.2rem)/1.15 var(--serif); letter-spacing: -.035em; }

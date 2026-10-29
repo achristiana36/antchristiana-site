@@ -76,10 +76,7 @@ const teachingHighlights = [
 		<div class="feature-grid">
 			{selectedWork.map((work, index) => (
 				<a
-					class:list={[
-						'feature-card',
-						index === 0 && 'feature-card--accent',
-					]}
+					class="feature-card"
 					href={work.href}
 				>
 					<span class="card-number">
